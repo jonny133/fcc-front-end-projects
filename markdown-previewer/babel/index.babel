@@ -45,8 +45,18 @@ I | II | III
 
 inline html: 
 
-<small>React and marked.js</small>
+<small>some small text</small>
 `;
+
+marked.setOptions({
+  gfm: true,
+  breaks: true,
+});
+
+const renderer = new marked.Renderer();
+renderer.link = function (href, title, text) {
+  return `<a target="_blank" href="${href}">${text}` + '</a>';
+}
 
 class App extends React.Component {
  constructor(props) {
@@ -66,12 +76,15 @@ class App extends React.Component {
  render() {
   return (
    <div id="overall">
+   <div id="header">
    <h1>Markdown Previewer</h1>
+    <small><em>Using React and marked.js</em></small>
+    </div>
    <div class="container">
    <div id="editor-pane">
    <Editor onChange={this.handleChange} content={this.state.content}/>
    </div>
-   
+  
    <div id="preview-pane">
    <Viewer content={this.state.content}/>
    </div>
@@ -89,7 +102,7 @@ const Editor = (props) => {
 
 const Viewer = (props) => {
  return (
-  <div id="preview" dangerouslySetInnerHTML={{__html: marked(props.content)}}></div>
+  <div id="preview" dangerouslySetInnerHTML={{__html: marked(props.content, { renderer: renderer })}}></div>
  );
 }
 
