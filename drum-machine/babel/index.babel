@@ -1,0 +1,148 @@
+/*
+
+import React, { Component} from 'react';
+import ReactDOM from 'react'; 
+*/
+
+const SOUNDS = [
+    {id: "Kick",
+    src: 'https://s3.amazonaws.com/freecodecamp/drums/RP4_KICK_1.mp3',
+    letter: 'Q',
+    keyCode: 81},
+
+    {id: "Closed Hi-hat",
+    src: 'https://s3.amazonaws.com/freecodecamp/drums/Cev_H2.mp3',
+    letter: 'W',
+    keyCode: 87},
+
+    {id: "Shaker",
+    src: 'https://s3.amazonaws.com/freecodecamp/drums/Give_us_a_light.mp3',
+    letter: 'E',
+    keyCode: 69},
+
+    {id: "Open Hi-hat",
+    src: 'https://s3.amazonaws.com/freecodecamp/drums/Dry_Ohh.mp3',
+    letter: 'A',
+    keyCode: 65},
+
+    {id: "Closed Hi-hat",
+    src: 'https://s3.amazonaws.com/freecodecamp/drums/Bld_H1.mp3',
+    letter: 'S',
+    keyCode: 83},
+
+    {id: "Side-stick",
+    src: 'https://s3.amazonaws.com/freecodecamp/drums/side_stick_1.mp3',
+    letter: 'D',
+    keyCode: 68},
+
+    {id: "Punchy Kick",
+    src: 'https://s3.amazonaws.com/freecodecamp/drums/punchy_kick_1.mp3',
+    letter: 'Z',
+    keyCode: 90},
+
+    {id: "Snare",
+    src: 'https://s3.amazonaws.com/freecodecamp/drums/Brk_Snr.mp3',
+    letter: 'X',
+    keyCode: 88},
+
+    {id: "Kick & Hat",
+    src: 'https://s3.amazonaws.com/freecodecamp/drums/Kick_n_Hat.mp3',
+    letter: 'C',
+    keyCode: 67},
+];
+
+const Display = (props) => {
+  return (<div id="display">{props.displayText}</div>);
+}
+
+class Pad extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.playSound = this.playSound.bind(this);
+        this.activatePad = this.activatePad.bind(this);
+        this.handleKeyPress = this.handleKeyPress.bind(this);
+    }
+
+    handleKeyPress(e) {
+        if (e.keyCode === this.props.keyCode) {
+            this.activatePad(e);
+        }  
+      }
+
+    activatePad(e) {
+    //set display text
+    this.props.setDisplayText(this.props.id);
+    //play sound
+    this.playSound(e);
+    }
+
+    playSound(e) {
+        const sound = document.getElementById(this.props.letter);
+        sound.currentTime = 0;
+        sound.play();
+    }
+      
+    componentDidMount() {
+        document.addEventListener('keydown', this.handleKeyPress);
+    } 
+    componentWillUnmount() {
+        document.removeEventListener('keydown', this.handleKeyPress);
+  }
+
+  render(){
+
+    const button = (
+      <button className="drum-pad" id={this.props.id} onClick={this.activatePad}>
+        <audio src={this.props.src} className="clip" id={this.props.letter} >{this.props.id}</audio>
+        {this.props.letter}
+    </button>);
+      return button;
+  }
+}
+
+class Pads extends React.Component {
+  
+  constructor(props) {
+    super(props);
+    //this.handleKeyPress = this.handleKeyPress.bind(this);
+    //this.handleClick = this.handleClick.bind(this);
+  }  
+
+  render() {
+    const soundBank = this.props.soundBank;
+    const buttons = soundBank.map(sound => 
+      {return <Pad id={sound.id} src={sound.src} letter={sound.letter} keyCode={sound.keyCode} setDisplayText={this.props.setDisplayText} />});
+
+    return (<div id="buttons">{buttons}</div>);
+};
+  
+}
+
+class App extends React.Component {
+  constructor (props) {
+    super(props);
+    this.state = {
+      displayText: ''
+    };
+    this.setDisplayText = this.setDisplayText.bind(this);
+  }
+
+  setDisplayText(text) {
+    this.setState(
+        {displayText: text}
+    );
+  }
+
+  render() {
+    return (
+      <div className='container'>
+        <h1>Drum Machine</h1>
+        <Display displayText={this.state.displayText} />
+        <Pads soundBank={SOUNDS} setDisplayText={this.setDisplayText}/>
+      </div>
+      );
+  }
+}
+
+ReactDOM.render(<App />, document.getElementById('drum-machine'));

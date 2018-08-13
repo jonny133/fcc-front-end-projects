@@ -1,0 +1,36 @@
+body {
+  margin: auto;
+  text-align: center;
+  background-color: #012;
+  color: white;
+  font-family: Helvetica, Arial, sans-serif;
+}
+body #display {
+  background-color: #345;
+  font-size: 2em;
+  padding: 5px;
+  margin: 10px;
+  height: 1em;
+}
+
+.container {
+  width: 30vw;
+  margin: 10px auto;
+  background-color: #222;
+  border-radius: 5px;
+  padding: 15px;
+}
+.container #buttons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-row-gap: 10px;
+  grid-column-gap: 10px;
+  justify-items: stretch;
+  align-items: stretch;
+}
+.container #buttons button {
+  height: 10vw;
+  border-radius: 10px;
+  font-size: 2em;
+}
