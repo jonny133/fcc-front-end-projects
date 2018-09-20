@@ -15,7 +15,7 @@ Calculator = function (_React$Component) {_inherits(Calculator, _React$Component
         props));
 
         _this.state = {
-            displayText: '',
+            displayText: '0',
             pendingOperation: null,
             storedNum: null };
 
@@ -24,7 +24,6 @@ Calculator = function (_React$Component) {_inherits(Calculator, _React$Component
         _this.clearCalc = _this.clearCalc.bind(_this);
         _this.totalUp = _this.totalUp.bind(_this);
         _this.calculate = _this.calculate.bind(_this);return _this;
-
     }_createClass(Calculator, [{ key: 'clearCalc', value: function clearCalc()
 
         {
@@ -38,8 +37,10 @@ Calculator = function (_React$Component) {_inherits(Calculator, _React$Component
         } }, { key: 'totalUp', value: function totalUp()
 
         {
+            //only total if valid numbers and operation pending
             if (!!this.state.pendingOperation && !isNaN(Number(this.state.displayText) && this.state.storedNum)) {
-                var result = this.state.pendingOperation ? this.state.pendingOperation(Number(this.state.displayText)) : this.state.storedNum; //will fail if display text not a number..
+
+                var result = this.state.pendingOperation ? this.state.pendingOperation(Number(this.state.displayText)) : this.state.storedNum;
 
                 this.setState({
                     displayText: result,
@@ -51,17 +52,15 @@ Calculator = function (_React$Component) {_inherits(Calculator, _React$Component
 
         operationType) {var _this2 = this;
 
-
-
-            var rsltIsNaN = isNaN(Number(this.state.displayText));
-            if (rsltIsNaN) {
+            var dtIsNumber = !isNaN(Number(this.state.displayText));
+            if (!dtIsNumber) {
                 this.setState({
                     pendingOperation: null });
 
             } else
             {
-                if (!isNaN(Number(this.state.displayText)) && !!this.state.pendingOperation) {
-                    this.setState({ storedNum: this.state.pendingOperation ? this.state.pendingOperation(Number(this.state.displayText)) : this.state.storedNum });
+                if (!!this.state.pendingOperation) {
+                    this.setState({ storedNum: this.state.pendingOperation(Number(this.state.displayText)) });
                 } else
                 {
                     this.setState({ storedNum: Number(this.state.displayText) });
@@ -98,28 +97,35 @@ Calculator = function (_React$Component) {_inherits(Calculator, _React$Component
         } }, { key: 'handleNumClick', value: function handleNumClick(
 
 
-        repr, e) {/*bugged */
-            if (isNaN(this.state.displayText)) {
-                this.setState({ displayText: repr });
-            } //catch NaNs
-            else {
-                    var newRepr = repr;
-                    if (this.state.displayText.includes('.') && newRepr == '.') {
-                        newRepr = ''; //prevent multiple decimal points
-                    }
-                    var newNum = (this.state.displayText + newRepr).replace(/^(0+)((?=\d))/, '$2'); //remove leading zeros
-                    if (null) {
-                        this.setState({
-                            storedNum: this.state.pendingOperation ? this.state.pendingOperation(Number(this.state.displayText)) : this.state.storedNum, //TODO
-                            pendingOperation: null,
-                            displayText: newNum });
-                    } else
-                    {
-                        this.setState({
-                            displayText: newNum });
+        repr, e) {
+            if (this.state.displayText.match(/^\.$/)) {
+                this.setState({ displayText: '0.' + repr });; //prevent multiple decimal points
+            } else
 
+            {
+                if (isNaN(this.state.displayText)) {
+                    this.setState({ displayText: repr });
+                } //catch NaNs
+                else {
+                        var newRepr = repr;
+                        if (this.state.displayText.includes('.') && newRepr == '.') {
+                            newRepr = ''; //prevent multiple decimal points
+                        }
+
+                        var newNum = (this.state.displayText + newRepr).replace(/^(0+)((?=\d))/, '$2'); //remove leading zeros
+                        if (null) {
+                            this.setState({
+                                storedNum: this.state.pendingOperation ? this.state.pendingOperation(Number(this.state.displayText)) : this.state.storedNum, //TODO
+                                pendingOperation: null,
+                                displayText: newNum });
+                        } else
+                        {
+                            this.setState({
+                                displayText: newNum });
+
+                        }
                     }
-                }
+            }
         } }, { key: 'render', value: function render()
 
         {var _this3 = this;
@@ -154,11 +160,12 @@ Calculator = function (_React$Component) {_inherits(Calculator, _React$Component
 
                     React.createElement('div', { id: 'calculator' },
                         React.createElement(Display, { displayText: this.state.displayText }),
-
-                        numberButtons.map(function (button) {return React.createElement(Button, { id: button.id, repr: button.repr, handleClick: _this3.handleNumClick });}),
-
-                        operationButtons.map(function (button) {return React.createElement(Button, { id: button.id, repr: button.repr, handleClick: button.operation });}))));
-
+                        numberButtons.map(function (button) {return (
+                                React.createElement(Button, { id: button.id, repr: button.repr, handleClick: _this3.handleNumClick }));
+                        }),
+                        operationButtons.map(function (button) {return (
+                                React.createElement(Button, { id: button.id, repr: button.repr, handleClick: button.operation }));
+                        }))));
 
 
         } }]);return Calculator;}(React.Component);
