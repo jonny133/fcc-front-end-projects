@@ -1,0 +1,138 @@
+#debug-panel {
+  position: fixed;
+  color: #f00;
+  display: none;
+}
+
+body {
+  background-color: #ccc;
+  font-family: Helvetica, Arial, sans-serif;
+}
+body h1 {
+  text-align: center;
+}
+
+#calculator {
+  margin: auto;
+  border: solid 5px black;
+  border-radius: 5px;
+  width: 40vw;
+  height: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto;
+  grid-template-areas: "display display display display" "clear clear clear multiply" "seven eight nine divide" "four five six add" "one two three subtract" "zero zero decimal equals";
+}
+#calculator #display {
+  text-align: right;
+  margin: auto 0px;
+  grid-area: display;
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  font-family: monospace;
+  font-size: 2.5em;
+  min-height: 2.5em;
+}
+
+#zero {
+  grid-area: zero;
+  min-height: 50px;
+  font-size: 2.5em;
+}
+
+#one {
+  grid-area: one;
+  min-height: 50px;
+  font-size: 2.5em;
+}
+
+#two {
+  grid-area: two;
+  min-height: 50px;
+  font-size: 2.5em;
+}
+
+#three {
+  grid-area: three;
+  min-height: 50px;
+  font-size: 2.5em;
+}
+
+#four {
+  grid-area: four;
+  min-height: 50px;
+  font-size: 2.5em;
+}
+
+#five {
+  grid-area: five;
+  min-height: 50px;
+  font-size: 2.5em;
+}
+
+#six {
+  grid-area: six;
+  min-height: 50px;
+  font-size: 2.5em;
+}
+
+#seven {
+  grid-area: seven;
+  min-height: 50px;
+  font-size: 2.5em;
+}
+
+#eight {
+  grid-area: eight;
+  min-height: 50px;
+  font-size: 2.5em;
+}
+
+#nine {
+  grid-area: nine;
+  min-height: 50px;
+  font-size: 2.5em;
+}
+
+#add {
+  grid-area: add;
+  min-height: 50px;
+  font-size: 2.5em;
+}
+
+#subtract {
+  grid-area: subtract;
+  min-height: 50px;
+  font-size: 2.5em;
+}
+
+#multiply {
+  grid-area: multiply;
+  min-height: 50px;
+  font-size: 2.5em;
+}
+
+#divide {
+  grid-area: divide;
+  min-height: 50px;
+  font-size: 2.5em;
+}
+
+#equals {
+  grid-area: equals;
+  min-height: 50px;
+  font-size: 2.5em;
+}
+
+#clear {
+  grid-area: clear;
+  min-height: 50px;
+  font-size: 2.5em;
+}
+
+#decimal {
+  grid-area: decimal;
+  min-height: 50px;
+  font-size: 2.5em;
+}

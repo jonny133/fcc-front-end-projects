@@ -1,0 +1,63 @@
+@media (max-width: 600px){
+  $width: 80vw;
+}
+
+$display-bgcol: #333;
+$font-size: 2.5em;
+$width: 40vw;
+
+#debug-panel {
+  position: fixed;
+  color: #f00;
+  display: none;
+}
+
+body {
+    background-color: #ccc;
+  font-family: Helvetica, Arial, sans-serif;
+  
+  h1 {
+    text-align: center;
+  }
+}
+
+#calculator {
+  margin: auto;
+  border: solid 5px black;
+  border-radius: 5px;
+  width: $width;
+  // height: $width;
+  height: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto;
+  grid-template-areas: 
+    "display display display display"
+    "clear clear clear multiply"
+    "seven eight nine divide"
+    "four five six add"
+    "one two three subtract"
+    "zero zero decimal equals";
+  
+  #display {
+    text-align: right;
+    margin: auto 0px;
+    grid-area: display;
+    background-color: $display-bgcol;
+    color: white;
+    padding: 10px;
+    font-family: monospace;
+    font-size: $font-size;
+    min-height: $font-size;
+  }
+}
+
+$buttons: zero one two three four five six seven eight nine add subtract multiply divide equals clear decimal;
+
+@each $button in $buttons {
+  ##{$button} {
+    grid-area: $button;
+    min-height: 50px;
+    font-size: $font-size;  
+  }
+}
