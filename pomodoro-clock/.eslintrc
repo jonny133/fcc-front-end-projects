@@ -1,0 +1,14 @@
+{
+  "extends": ["airbnb", "prettier"],
+  "env": {
+    "node": true,
+    "es6": true,
+    "browser": true
+  },
+  "plugins": ["prettier"],
+  "rules": {
+    "camelcase": "off",
+    "react/no-multi-comp": "off",
+    "react/jsx-filename-extension": "off"
+  }
+}

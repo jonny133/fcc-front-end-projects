@@ -1,0 +1,49 @@
+body {
+  padding: 0;
+  margin: 25px auto;
+  background-color: darkred;
+  color: white;
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.container {
+  margin: 25px;
+}
+
+.control-set {
+  // display: flex;
+  margin: 10px;
+  // columns: 3;
+}
+
+.debug-panel {
+  background-color: #ff9;
+  color: red;
+}
+
+button {
+  margin: 5px;
+}
+
+.circle__red {
+  width: 30px;
+  height: 30px;
+  border: 1px solid black;
+  margin: auto;
+  background-color: red;
+  border-radius: 50%;
+  clear: none;
+}
+
+.circle__green {
+  width: 30px;
+  height: 30px;
+  border: 1px solid black;
+  margin: auto;
+  background-color: green;
+  border-radius: 50%;
+  clear: none;
+
+  /* width and height can be anything, as long as they're equal */
+}
