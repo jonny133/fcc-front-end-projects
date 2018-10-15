@@ -1,20 +1,16 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono|Niramit');
+
 body {
   padding: 0;
   margin: 25px auto;
   background-color: darkred;
   color: white;
-  font-family: sans-serif;
+  font-family: 'Niramit', sans-serif;
   text-align: center;
 }
 
 .container {
-  margin: 25px;
-}
-
-.control-set {
-  // display: flex;
-  margin: 10px;
-  // columns: 3;
+  margin: 1px;
 }
 
 .debug-panel {
@@ -23,27 +19,72 @@ body {
 }
 
 button {
+  display: inline-block;
+  border: 1px solid #dcdcdc;
   margin: 5px;
+  background-color: #ededed;
+  border-radius: 6px;
+  color: #777;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  text-indent: 0;
+  // text-shadow: 1px 1px 0 #fff;
 }
 
-.circle__red {
-  width: 30px;
-  height: 30px;
-  border: 1px solid black;
-  margin: auto;
-  background-color: red;
-  border-radius: 50%;
-  clear: none;
+#display {
+  color: grey;
+
+  #timer-label {
+    padding: 10px;
+    color: white;
+    font-size: 2em;
+  }
+
+  #time-left {
+    display: inline-block;
+    padding: 20px;
+    margin: 5px;
+    background-color: rgba(255, 80, 42, .3);
+    border-radius: 10px;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 6em;
+    font-weight: bold;
+  }
 }
 
-.circle__green {
-  width: 30px;
-  height: 30px;
-  border: 1px solid black;
-  margin: auto;
-  background-color: green;
-  border-radius: 50%;
-  clear: none;
-
-  /* width and height can be anything, as long as they're equal */
+.turnGreen {
+  color: mintcream;
 }
+
+#control-container {
+  display: inline-block;
+  width: auto;
+  padding: 10px;
+  margin: 20px;
+  background: rgba(10, 10, 10, .3);
+  border-radius: 5px;
+
+  .control-set {
+    padding: 20px;
+    margin: 20px;
+    background-color: rgb(161, 30, 0);
+    border-radius: 10px;
+    // font-family: 'Roboto Mono', monospace;
+    font-weight: bold;
+  }
+
+  #other-controls-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: stretch;
+    align-items: stretch;
+    justify-content: center;
+    margin: 0 auto;
+  }
+}
+
+/* width and height can be anything, as long as they're equal */
+// }

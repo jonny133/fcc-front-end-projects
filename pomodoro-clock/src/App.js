@@ -1,7 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import logo from './logo.svg';
-// import './App.css';
 
 const Controls = ({
   breakLength,
@@ -14,35 +12,39 @@ const Controls = ({
   startStop,
 }) => (
   <div id="control-container" className="container">
-    <div id="break-controls" className="control-set">
-      <button type="button" id="break-decrement" onClick={decrementBreak}>
-        -
-      </button>
-      <span id="break-label">Break length</span>
-      <span id="break-length">{breakLength}</span>
-      <button type="button" id="break-increment" onClick={incrementBreak}>
-        +
-      </button>
-    </div>
-    <div id="session-controls" className="control-set">
-      <button type="button" id="session-decrement" onClick={decrementSession}>
-        -
-      </button>
-      <span id="session-label">Session length</span>
-      <span id="session-length">{sessionLength}</span>
-      <button type="button" id="session-increment" onClick={incrementSession}>
-        +
-      </button>
-    </div>
-
     <div id="main-controls">
-      {/* <div id="time-left">{`${minutes}:${seconds}`}</div> */}
       <button type="button" id="start_stop" onClick={startStop}>
         Start/Stop
       </button>
       <button type="button" id="reset" onClick={resetClock}>
-        reset
+        Reset
       </button>
+    </div>
+
+    <div id="other-controls-container">
+      <div id="break-controls" className="control-set">
+        <p id="break-label">Break length</p>
+        <button type="button" id="break-decrement" onClick={decrementBreak}>
+          -
+        </button>
+
+        <span id="break-length">{breakLength}</span>
+        <button type="button" id="break-increment" onClick={incrementBreak}>
+          +
+        </button>
+      </div>
+
+      <div id="session-controls" className="control-set">
+        <p id="session-label">Session length</p>
+        <button type="button" id="session-decrement" onClick={decrementSession}>
+          -
+        </button>
+
+        <span id="session-length">{sessionLength}</span>
+        <button type="button" id="session-increment" onClick={incrementSession}>
+          +
+        </button>
+      </div>
     </div>
   </div>
 );
@@ -80,14 +82,12 @@ const Display = props => {
   return (
     <div id="display" className="container">
       <div id="timer-label">
-        {(running && <div className="circle__green" />) || (
-          <div className="circle__red" />
-        )}
         {(mode || 'session').toUpperCase()}
         {` ${Math.ceil(sessionNo / 2)}`}
       </div>
-      <div id="time-left">{`${minutes}:${seconds}`}</div>
-      {/* <p>Running:</p> */}
+      <div id="time-left" className={running && 'turnGreen'}>
+        {`${minutes}:${seconds}`}
+      </div>
     </div>
   );
 };
@@ -95,8 +95,6 @@ const Display = props => {
 Display.propTypes = {
   timeLeft: PropTypes.number.isRequired,
   running: PropTypes.bool.isRequired,
-  // sessionNo: PropTypes.number.isRequired,
-  // mode: PropTypes.any.isRequired,
 };
 
 class App extends React.Component {
@@ -170,13 +168,7 @@ class App extends React.Component {
   }
 
   startStop() {
-    const {
-      running,
-      intervalID,
-      mode,
-      sessionLength,
-      breakLength,
-    } = this.state;
+    const { running, intervalID, mode, sessionLength } = this.state;
 
     // START
 
@@ -195,8 +187,6 @@ class App extends React.Component {
           ...newStateObj,
         });
       } else {
-        // this.toggleSessionBreak();
-
         this.setState({
           // timeLeft: sessionLength * 60,
           ...newStateObj,
@@ -240,8 +230,6 @@ class App extends React.Component {
   }
 
   update(refreshInterval = 1) {
-    // IMPLEMENT IF TIMER 00:00, reset and increment session number
-
     const { timeLeft, intervalID } = this.state;
     if (timeLeft - refreshInterval < refreshInterval) {
       this.intervalID = clearInterval(intervalID);
@@ -273,7 +261,7 @@ class App extends React.Component {
     } = this.state;
 
     return (
-      <div>
+      <div className="container--mega">
         <Display
           timeLeft={timeLeft}
           running={running}
