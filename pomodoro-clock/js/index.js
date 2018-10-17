@@ -1,8 +1,5 @@
-var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;} // import React, {Component} from 'react';
+var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var _createClass = function () {function defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}return function (Constructor, protoProps, staticProps) {if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;};}();function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _possibleConstructorReturn(self, call) {if (!self) {throw new ReferenceError("this hasn't been initialised - super() hasn't been called");}return call && (typeof call === "object" || typeof call === "function") ? call : self;}function _inherits(subClass, superClass) {if (typeof superClass !== "function" && superClass !== null) {throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;} // import React from 'react';
 // import PropTypes from 'prop-types';
-// import ReactDOM from 'react-dom';
-// import {Component} from 'react';
-
 
 var Controls = function Controls(_ref) {var
   breakLength = _ref.breakLength,
@@ -15,33 +12,37 @@ var Controls = function Controls(_ref) {var
   startStop = _ref.startStop;return (
 
     React.createElement("div", { id: "control-container", className: "container" },
-      React.createElement("div", { id: "break-controls", className: "control-set" },
-        React.createElement("button", { type: "button", id: "break-decrement", onClick: decrementBreak }, "-"),
-
-
-        React.createElement("span", { id: "break-label" }, "Break length"),
-        React.createElement("span", { id: "break-length" }, breakLength),
-        React.createElement("button", { type: "button", id: "break-increment", onClick: incrementBreak }, "+")),
-
-
-
-      React.createElement("div", { id: "session-controls", className: "control-set" },
-        React.createElement("button", { type: "button", id: "session-decrement", onClick: decrementSession }, "-"),
-
-
-        React.createElement("span", { id: "session-label" }, "Session length"),
-        React.createElement("span", { id: "session-length" }, sessionLength),
-        React.createElement("button", { type: "button", id: "session-increment", onClick: incrementSession }, "+")),
-
-
-
-
       React.createElement("div", { id: "main-controls" },
-
         React.createElement("button", { type: "button", id: "start_stop", onClick: startStop }, "Start/Stop"),
 
 
-        React.createElement("button", { type: "button", id: "reset", onClick: resetClock }, "reset"))));};
+        React.createElement("button", { type: "button", id: "reset", onClick: resetClock }, "Reset")),
+
+
+
+
+      React.createElement("div", { id: "other-controls-container" },
+        React.createElement("div", { id: "break-controls", className: "control-set" },
+          React.createElement("p", { id: "break-label" }, "Break length"),
+          React.createElement("button", { type: "button", id: "break-decrement", onClick: decrementBreak }, "-"),
+
+
+
+          React.createElement("span", { id: "break-length" }, breakLength),
+          React.createElement("button", { type: "button", id: "break-increment", onClick: incrementBreak }, "+")),
+
+
+
+
+        React.createElement("div", { id: "session-controls", className: "control-set" },
+          React.createElement("p", { id: "session-label" }, "Session length"),
+          React.createElement("button", { type: "button", id: "session-decrement", onClick: decrementSession }, "-"),
+
+
+
+          React.createElement("span", { id: "session-length" }, sessionLength),
+          React.createElement("button", { type: "button", id: "session-increment", onClick: incrementSession }, "+")))));};
+
 
 
 
@@ -81,13 +82,11 @@ var Display = function Display(props) {var
   return (
     React.createElement("div", { id: "display", className: "container" },
       React.createElement("div", { id: "timer-label" },
-        running && React.createElement("div", { className: "circle__green" }) ||
-        React.createElement("div", { className: "circle__red" }),
-
         (mode || 'session').toUpperCase(), " " +
         Math.ceil(sessionNo / 2)),
 
-      React.createElement("div", { id: "time-left" }, minutes + ":" + seconds)));
+      React.createElement("div", { id: "time-left", className: running && 'turnGreen' },
+        minutes + ":" + seconds)));
 
 
 
@@ -95,10 +94,8 @@ var Display = function Display(props) {var
 
 Display.propTypes = {
   timeLeft: PropTypes.number.isRequired,
-  running: PropTypes.bool.isRequired
-  // sessionNo: PropTypes.number.isRequired,
-  // mode: PropTypes.any.isRequired,
-};var
+  running: PropTypes.bool.isRequired };var
+
 
 App = function (_React$Component) {_inherits(App, _React$Component);
   function App(props) {_classCallCheck(this, App);var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this,
@@ -171,13 +168,7 @@ App = function (_React$Component) {_inherits(App, _React$Component);
     } }, { key: "startStop", value: function startStop()
 
     {var _this2 = this;var _state =
-
-
-
-
-
-
-      this.state,running = _state.running,intervalID = _state.intervalID,mode = _state.mode,sessionLength = _state.sessionLength,breakLength = _state.breakLength;
+      this.state,running = _state.running,intervalID = _state.intervalID,mode = _state.mode,sessionLength = _state.sessionLength;
 
       // START
 
@@ -196,8 +187,6 @@ App = function (_React$Component) {_inherits(App, _React$Component);
           newStateObj));
 
         } else {
-          // this.toggleSessionBreak();
-
           this.setState(_extends({},
 
           newStateObj));
@@ -240,9 +229,7 @@ App = function (_React$Component) {_inherits(App, _React$Component);
 
     } }, { key: "update", value: function update()
 
-    {var _this4 = this;var refreshInterval = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      // IMPLEMENT IF TIMER 00:00, reset and increment session number
-      var _state2 =
+    {var _this4 = this;var refreshInterval = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;var _state2 =
       this.state,timeLeft = _state2.timeLeft,intervalID = _state2.intervalID;
       if (timeLeft - refreshInterval < refreshInterval) {
         this.intervalID = clearInterval(intervalID);
@@ -251,7 +238,7 @@ App = function (_React$Component) {_inherits(App, _React$Component);
             running: false,
             timeLeft: 0 });
 
-          setTimeout(function () {return _this4.toggleSessionBreak();}, 100);
+          setTimeout(function () {return _this4.toggleSessionBreak();}, 50);
           var beep = document.getElementById('beep');
           beep.play();
         }, timeLeft);
@@ -274,7 +261,7 @@ App = function (_React$Component) {_inherits(App, _React$Component);
       this.state,timeLeft = _state3.timeLeft,breakLength = _state3.breakLength,sessionLength = _state3.sessionLength,running = _state3.running,sessionNo = _state3.sessionNo,mode = _state3.mode;
 
       return (
-        React.createElement("div", null,
+        React.createElement("div", { className: "container--mega" },
           React.createElement(Display, {
             timeLeft: timeLeft,
             running: running,
@@ -294,11 +281,16 @@ App = function (_React$Component) {_inherits(App, _React$Component);
 
 
 
-          React.createElement("audio", { id: "beep", preload: "auto", src: "http://soundbible.com/grab.php?id=2197&type=mp3" })));
 
 
 
 
+          React.createElement("audio", {
+              id: "beep",
+              preload: "auto",
+              src: "http://soundbible.com/grab.php?id=2197&type=mp3" },
+
+            React.createElement("track", { "default": true, kind: "subtitles", srcLang: "en", src: "./#" }), "Beep")));
 
 
 
@@ -311,5 +303,5 @@ App = function (_React$Component) {_inherits(App, _React$Component);
 
     } }]);return App;}(React.Component);
 
-
 ReactDOM.render(React.createElement(App, null), document.getElementById('root'));
+// export default App;

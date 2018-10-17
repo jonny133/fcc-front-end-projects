@@ -1,18 +1,15 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto+Mono|Niramit");
 body {
   padding: 0;
   margin: 25px auto;
-  font-family: sans-serif;
-  text-align: center;
   background-color: darkred;
   color: white;
+  font-family: 'Niramit', sans-serif;
+  text-align: center;
 }
 
 .container {
-  margin: 25px;
-}
-
-.control-set {
-  margin: 10px;
+  margin: 1px;
 }
 
 .debug-panel {
@@ -21,26 +18,65 @@ body {
 }
 
 button {
+  display: inline-block;
+  border: 1px solid #dcdcdc;
   margin: 5px;
+  background-color: #ededed;
+  border-radius: 6px;
+  color: #777;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  text-indent: 0;
 }
 
-.circle__red {
-  width: 30px;
-  height: 30px;
-  margin: auto;
-  background-color: red;
-  border-radius: 50%;
-  clear: none;
-  border: 1px solid black;
+#display {
+  color: grey;
+}
+#display #timer-label {
+  padding: 10px;
+  color: white;
+  font-size: 2em;
+}
+#display #time-left {
+  display: inline-block;
+  padding: 20px;
+  margin: 5px;
+  background-color: rgba(255, 80, 42, 0.3);
+  border-radius: 10px;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 6em;
+  font-weight: bold;
 }
 
-.circle__green {
-  width: 30px;
-  height: 30px;
-  margin: auto;
-  background-color: green;
-  border-radius: 50%;
-  clear: none;
-  border: 1px solid black;
-  /* width and height can be anything, as long as they're equal */
+.turnGreen {
+  color: mintcream;
 }
+
+#control-container {
+  display: inline-block;
+  width: auto;
+  padding: 10px;
+  margin: 20px;
+  background: rgba(10, 10, 10, 0.3);
+  border-radius: 5px;
+}
+#control-container .control-set {
+  padding: 20px;
+  margin: 20px;
+  background-color: #a11e00;
+  border-radius: 10px;
+  font-weight: bold;
+}
+#control-container #other-controls-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: stretch;
+  align-items: stretch;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+/* width and height can be anything, as long as they're equal */
