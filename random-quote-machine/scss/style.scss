@@ -1,8 +1,19 @@
+$theme-colors: (
+  "primary": #000,
+  "danger": #ff4136
+);
 body {
-  background-color: #eef;
+  background-color: #ccf !important;
 }
 
+
 .container {
+  
+  
+h1 {
+  margin: 25px;
+}
+  
   #quote-box {
     margin: auto;
     background-color: #ddf;
@@ -11,7 +22,9 @@ body {
     border: 3px solid #36d;
     border-radius: 15px;
     box-shadow: 0px 0px 5px 3px rgb(133, 166, 255);
-    
+    i.fa-quote-right {
+      float: right;  
+    }
     #text-and-author {
       padding: 20px;
     }

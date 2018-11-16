@@ -1,7 +1,10 @@
 body {
-  background-color: #eef !important;
+  background-color: #ccf !important;
 }
 
+.container h1 {
+  margin: 25px;
+}
 .container #quote-box {
   margin: auto;
   background-color: #ddf;
@@ -9,7 +12,10 @@ body {
   padding: 20px;
   border: 3px solid #36d;
   border-radius: 15px;
-  box-shadow: 0px 0px 5px 3px rgb(133, 166, 255);
+  box-shadow: 0px 0px 5px 3px #85a6ff;
+}
+.container #quote-box i.fa-quote-right {
+  float: right;
 }
 .container #quote-box #text-and-author {
   padding: 20px;
